@@ -9,11 +9,16 @@ app.use(express.json())
 
 app.get('/produtos', (req, res) => {
   let filtro = []
-  let ssql = 'SELECT * FROM TAB_PRODUTO'
+  let ssql = 'SELECT * FROM TAB_PRODUTO WHERE 1=1'
 
   if (req.query.descricao) {
-    filtro.push(req.query.descricao)
+    filtro.push('%' + req.query.descricao + '%')
     ssql += ' AND descricao LIKE ?'
+  }
+
+  if (req.query.valor) {
+    filtro.push(req.query.valor)
+    ssql += ' AND valor >= ?'
   }
 
   executeQuery(ssql, filtro, (err, result) => {
