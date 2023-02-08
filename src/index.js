@@ -9,9 +9,9 @@ app.use(express.json())
 
 //--------------------------
 
-app.get('/produtos', (req, res) => {
+app.get('/consulta', (req, res) => {
   let filtro = []
-  let ssql = 'SELECT * FROM TAB_PRODUTO WHERE 1=1'
+  let ssql = 'SELECT * FROM ALIQCUPOM WHERE 1=1'
 
   if (req.query.descricao) {
     filtro.push('%' + req.query.descricao + '%')
@@ -31,14 +31,29 @@ app.get('/produtos', (req, res) => {
 
 //--------------------------
 
-app.post('/produtos', (req, res) => {
+app.post('/inserir', (req, res) => {
   let ssql =
-    'INSERT INTO TAB_PRODUTO (descricao, valor) VALUES (?, ?) RETURNING  ID_PRODUTO'
+    'INSERT INTO ALIQCUPOM (IMPRESSORA, DESCRICAO, ALIQUOTA, TIPO_ALIQ, MAQUINA, ID_IMPFISCAL, ID_EMPRESA) VALUES (?, ?, ?, ?, ?, ?, ?)'
 
-  executeQuery(ssql, [req.body.descricao, req.body.valor], (err, result) => {
-    if (err) return res.status(500).json({ error: err.message })
-    return res.json({ id_produto: result[0].ID_PRODUTO })
-  })
+  executeQuery(
+    ssql,
+    [
+      req.body.IMPRESSORA,
+      req.body.DESCRICAO,
+      req.body.ALIQUOTA,
+      req.body.TIPO_ALIQ,
+      req.body.MAQUINA,
+      req.body.ID_IMPFISCAL,
+      req.body.ID_EMPRESA
+    ],
+    (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: err.message })
+      }
+      console.log(result)
+      return res.status(201).json({ message: 'Inserido com sucesso!' })
+    }
+  )
 })
 
 //--------------------------
