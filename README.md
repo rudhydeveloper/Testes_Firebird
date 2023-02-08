@@ -12,7 +12,7 @@
 ### 6. Abra o arquivo `/config/database.js` e altere as informações de conexão com o banco de dados no objeto `dbOptions`
 ### 7. Abra o terminal do seu editor de código e digite o comando `npm start` para rodar o projeto
 
-## Consultar requisiçoes pelo Postman
+## Consultar requisições pelo Postman
 
-### 1. Se não tiver o Postman instaldo baixe aqui: [Postman](https://www.postman.com/downloads/)
-### 2. No Postman crie uma requisiçao para cada uma das rotas que serão testadas. Exemplo: `http://localhost:3000/produtos`
+### 1. Se não tiver o Postman instalado baixe aqui: [Postman](https://www.postman.com/downloads/)
+### 2. No Postman crie uma requisição para cada uma das rotas que serão testadas. Exemplo: `http://localhost:3000/produtos`
